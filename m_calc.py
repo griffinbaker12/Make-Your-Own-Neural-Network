@@ -60,3 +60,46 @@ B = np.array(
 )
 
 print(np.dot(A, B))
+
+X = [
+    [0.9, 0.3, 0.4],
+    [0.2, 0.8, 0.2],
+    [0.1, 0.5, 0.6],
+]
+Y = [
+    [0.9],
+    [0.1],
+    [0.8],
+]
+wih = np.array(X)
+i = np.array(Y)
+
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+
+X_ANS = np.dot(wih, i)
+O = sigmoid(X_ANS)
+print(O)
+
+
+def mm(m1, m2):
+    i, j, k = len(m1), len(m2), len(m2[0])
+    if len(m1[0]) != k:
+        print("Can't multiply this matrix")
+        return
+    result = [[0 for _ in range(k)] for _ in range(i)]
+    for _i in range(i):
+        for _j in range(j):
+            for _k in range(k):
+                result[_i][_k] += m1[_i][_j] * m2[_j][_k]
+    return result
+
+
+X = [[1, 2], [3, 4]]
+
+Y = [[5, 6], [7, 8]]
+
+print(mm(X, Y))
+print(np.dot(X, Y))
