@@ -1,10 +1,11 @@
 import numpy as np
+import scipy.ndimage as snd
 
 from constants import hidden_nodes, input_nodes, learning_rate, output_nodes
 from net import NeuralNetwork
 
 
-def train_and_eval(learning_rate, epochs=5):
+def train_and_eval(learning_rate, epochs=10):
     nn = NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
     for _ in range(epochs):
@@ -17,6 +18,15 @@ def train_and_eval(learning_rate, epochs=5):
             targets = np.zeros(output_nodes) + 0.01
             targets[int(all_values[0])] = 0.99
             nn.train(inputs, targets)
+
+            inputs_plus10_img = snd.rotate(
+                inputs.reshape(28, 28), 10, cval=0.01, order=1, reshape=False
+            )
+            nn.train(inputs_plus10_img.reshape(784), targets)
+            inputs_minus10_img = snd.rotate(
+                inputs.reshape(28, 28), -10, cval=0.01, order=1, reshape=False
+            )
+            nn.train(inputs_minus10_img.reshape(784), targets)
 
     scorecard = []
 
@@ -43,11 +53,11 @@ print(f" Total accuracy: ", train_and_eval(learning_rate))
 #     accuracy = train_and_eval(lr)
 #     results.append(accuracy)
 #
-
-# Find the best learning rate
+#
+# # Find the best learning rate
 # best_lr = learning_rates[np.argmax(results)]
 # print(f"Best learning rate: {best_lr:.6f}")
-
+#
 # plt.figure(figsize=(10, 6))
 # plt.semilogx(learning_rates, results, "bo-")
 #
