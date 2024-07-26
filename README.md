@@ -7,3 +7,5 @@ The final architecture ended up being:
 - 10 output layers
 
 The net was trained over 7 epochs with a learning rate of 0.297635 (optimal lr holding the epoch and hidden layer counts constant).
+
+The final accuracy was 98.44%.
