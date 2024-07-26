@@ -1,2 +1,8 @@
 # What is this?
-A repo dedicated to experiments inspired by working through the book "Make Your Own Neural Network".
+An MNIST classifier!
+
+The final architecture ended up being:
+- 200 hidden layers
+- Learning rate of 0.297635
+
+And was trained over 7 epochs.
